@@ -157,28 +157,6 @@ export default function Home() {
         </Card>
       )}
 
-      {/* Instructions */}
-      <Card className="p-6 bg-muted/50">
-        <h3 className="text-lg font-semibold mb-3">How to Play</h3>
-        <div className="grid gap-3 text-sm text-muted-foreground">
-          <div className="flex gap-3">
-            <span className="font-semibold text-primary">1.</span>
-            <span>Drag operations from the available pool to the sequence area</span>
-          </div>
-          <div className="flex gap-3">
-            <span className="font-semibold text-primary">2.</span>
-            <span>Arrange them in the correct order to transform the input number to the target</span>
-          </div>
-          <div className="flex gap-3">
-            <span className="font-semibold text-primary">3.</span>
-            <span>Use all operations exactly once to complete the puzzle</span>
-          </div>
-          <div className="flex gap-3">
-            <span className="font-semibold text-primary">4.</span>
-            <span>Each day has a new puzzle with different operations and numbers</span>
-          </div>
-        </div>
-      </Card>
     </div>
   );
 }

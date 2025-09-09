@@ -188,7 +188,6 @@ export function GameBoard({ gameData, onGameComplete, submittedResult, isReviewM
           {/* Current Result Display - Only show after submission */}
           {isSubmitted && finalResult !== null && (
             <div className="flex items-center justify-center gap-2">
-              <span className="text-sm text-muted-foreground">Final result:</span>
               <Badge 
                 variant={isCorrect ? "default" : "secondary"}
                 className="text-lg px-3 py-1"

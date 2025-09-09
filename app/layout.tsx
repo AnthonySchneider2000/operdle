@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar";
 import { QueryProvider } from "@/components/query-provider";
+import { HowToPlayPopover } from "@/components/how-to-play-popover";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,7 @@ export default function RootLayout({
       >
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <SidebarProvider>
+            <SidebarProvider defaultOpen={false}>
               <AppSidebar />
               <div className="relative flex min-h-screen w-full flex-col">
                 <Header />
@@ -55,7 +56,8 @@ function Header() {
       <div className="flex h-16 items-center w-full px-4">
         <SidebarTrigger />
         <div className="flex-1 flex justify-center font-medium">{SITE_TITLE}</div>
-        <div className="w-14 flex justify-end">
+        <div className="flex items-center gap-2">
+          <HowToPlayPopover />
           <ThemeToggle />
         </div>
       </div>
