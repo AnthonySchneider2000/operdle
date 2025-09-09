@@ -79,7 +79,7 @@ export default function Home() {
         <GameCalendar
           onDateSelect={handleDateSelect}
           selectedDate={selectedDate}
-          minDate={new Date('2025-09-02')}
+          minDate={new Date('2025-09-01')}
           maxDate={new Date()}
         />
       </div>
