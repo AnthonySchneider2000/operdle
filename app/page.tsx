@@ -66,42 +66,6 @@ export default function Home() {
           submittedResult={result}
           isReviewMode={!!result}
         />
-
-        {/* Show correct solution for completed puzzles */}
-        {isCompleted && (
-          <Card className="p-6 bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800">
-            <div className="text-center space-y-4">
-              <Trophy className="h-8 w-8 text-green-600 mx-auto" />
-              <h3 className="text-lg font-semibold text-green-800 dark:text-green-200">
-                Puzzle Completed Successfully!
-              </h3>
-              <p className="text-green-700 dark:text-green-300">
-                Solved on {result?.solvedAt ? format(new Date(result.solvedAt), 'MMMM d, yyyy') : 'a previous date'}.
-              </p>
-              
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-green-800 dark:text-green-200">
-                  Correct Solution:
-                </p>
-                <div className="flex items-center justify-center gap-2 flex-wrap">
-                  <Badge variant="outline">{gameData.inputNumber}</Badge>
-                  {gameData.solution.map((operationId) => {
-                    const operation = gameData.operations.find(op => op.id === operationId);
-                    return operation ? (
-                      <div key={operationId} className="flex items-center gap-2">
-                        <span className="text-muted-foreground">→</span>
-                        <Badge variant="secondary">{operation.label}</Badge>
-                      </div>
-                    ) : null;
-                  })}
-                  <span className="text-muted-foreground">→</span>
-                  <Badge variant="outline">{gameData.targetNumber}</Badge>
-                </div>
-              </div>
-            </div>
-          </Card>
-        )}
-
       </div>
 
       {/* Previous Days Section */}
