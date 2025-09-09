@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar";
+import { QueryProvider } from "@/components/query-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,11 +16,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_TITLE = "Shadcn Boilerplate";
+const SITE_TITLE = "Operdle";
 
 export const metadata: Metadata = {
   title: SITE_TITLE,
-  description: "A boilerplate for Next.js with TypeScript, Tailwind CSS, and more.",
+  description: "A daily math puzzle game where you arrange operations to reach the target number.",
 };
 
 export default function RootLayout({
@@ -32,15 +33,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <SidebarProvider>
-            <AppSidebar />
-            <div className="relative flex min-h-screen w-full flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-            </div>
-          </SidebarProvider>
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <SidebarProvider>
+              <AppSidebar />
+              <div className="relative flex min-h-screen w-full flex-col">
+                <Header />
+                <main className="flex-1">{children}</main>
+              </div>
+            </SidebarProvider>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
