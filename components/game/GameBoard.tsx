@@ -312,7 +312,7 @@ function SequenceDropArea({ operations, minWidth, isLocked }: { operations: Oper
       }}
     >
       {operations.length === 0 ? (
-        <div className="text-muted-foreground text-sm py-2">Drag operations here</div>
+        <div className="text-muted-foreground text-sm py-4">Drag operations here</div>
       ) : (
         <div className="flex items-center gap-2 flex-wrap justify-center">
           {operations.map((operation, index) => (

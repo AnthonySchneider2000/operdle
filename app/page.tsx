@@ -14,7 +14,6 @@ import { Calendar, Trophy, Target, Clock } from 'lucide-react';
 
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [showCalendar, setShowCalendar] = useState(false);
   
   // Sync storage changes across tabs
   useStorageSync();
@@ -37,7 +36,6 @@ export default function Home() {
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
-    setShowCalendar(false);
   };
 
   if (isLoading || !gameData) {
@@ -67,14 +65,10 @@ export default function Home() {
       <Card className="p-4">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-4">
-            <Button
-              variant="outline"
-              onClick={() => setShowCalendar(!showCalendar)}
-              className="flex items-center gap-2"
-            >
+            <div className="flex items-center gap-2 px-3 py-2 border rounded-md">
               <Calendar className="h-4 w-4" />
               {format(selectedDate, 'MMMM d, yyyy')}
-            </Button>
+            </div>
             
             {isToday && <Badge variant="default">Today</Badge>}
             {isCompleted && (
@@ -99,18 +93,6 @@ export default function Home() {
           )}
         </div>
       </Card>
-
-      {/* Calendar (conditional) */}
-      {showCalendar && (
-        <div className="animate-in slide-in-from-top-2 duration-200">
-          <GameCalendar
-            onDateSelect={handleDateSelect}
-            selectedDate={selectedDate}
-            minDate={new Date('2024-01-01')}
-            maxDate={new Date()}
-          />
-        </div>
-      )}
 
       <Separator />
 
@@ -156,6 +138,24 @@ export default function Home() {
           </div>
         </Card>
       )}
+
+      {/* Previous Days Section */}
+      <div className="pt-12 space-y-6">
+        <Separator />
+        <div className="text-center space-y-2">
+          <h2 className="text-2xl font-bold">Previous Days</h2>
+          <p className="text-muted-foreground">
+            Select a previous date to play or review that day's puzzle
+          </p>
+        </div>
+        
+        <GameCalendar
+          onDateSelect={handleDateSelect}
+          selectedDate={selectedDate}
+          minDate={new Date('2024-01-01')}
+          maxDate={new Date()}
+        />
+      </div>
 
     </div>
   );
