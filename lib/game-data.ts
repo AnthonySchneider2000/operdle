@@ -1,4 +1,4 @@
-import { format, addDays } from 'date-fns';
+import { format } from 'date-fns';
 import { GameData, Operation, OperationType } from './types';
 
 // Seed for consistent daily puzzles

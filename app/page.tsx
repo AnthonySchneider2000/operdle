@@ -6,11 +6,10 @@ import { GameBoard } from '@/components/game/GameBoard';
 import { GameCalendar } from '@/components/game/GameCalendar';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useGameData } from '@/hooks/use-game-data';
-import { useUserProgress, useMarkDateCompleted, useDateCompletion, useStorageSync } from '@/hooks/use-user-progress';
-import { Calendar, Trophy, Target, Clock } from 'lucide-react';
+import { useMarkDateCompleted, useDateCompletion, useStorageSync } from '@/hooks/use-user-progress';
+import { Trophy, Target } from 'lucide-react';
 
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -19,12 +18,10 @@ export default function Home() {
   useStorageSync();
   
   const { data: gameData, isLoading } = useGameData(selectedDate);
-  const { data: userProgress } = useUserProgress();
   const markCompleted = useMarkDateCompleted();
   
   const selectedDateString = format(selectedDate, 'yyyy-MM-dd');
   const { isCompleted, result } = useDateCompletion(selectedDateString);
-  const isToday = format(selectedDate, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd');
 
   const handleGameComplete = (isCorrect: boolean, submittedSolution: string[]) => {
     markCompleted.mutate({
@@ -88,7 +85,7 @@ export default function Home() {
                 </p>
                 <div className="flex items-center justify-center gap-2 flex-wrap">
                   <Badge variant="outline">{gameData.inputNumber}</Badge>
-                  {gameData.solution.map((operationId, index) => {
+                  {gameData.solution.map((operationId) => {
                     const operation = gameData.operations.find(op => op.id === operationId);
                     return operation ? (
                       <div key={operationId} className="flex items-center gap-2">
@@ -113,7 +110,7 @@ export default function Home() {
         <div className="text-center space-y-2">
           <h2 className="text-2xl font-bold">Previous Days</h2>
           <p className="text-muted-foreground">
-            Select a previous date to play or review that day's puzzle
+            Select a previous date to play or review that day&apos;s puzzle
           </p>
         </div>
         

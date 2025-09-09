@@ -11,14 +11,12 @@ import {
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
-  DragOverEvent,
   useDroppable,
 } from '@dnd-kit/core';
 import {
   SortableContext,
   verticalListSortingStrategy,
   arrayMove,
-  sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -268,7 +266,7 @@ export function GameBoard({ gameData, onGameComplete, submittedResult, isReviewM
                     Congratulations!
                   </h3>
                   <p className="text-green-700 dark:text-green-300">
-                    You solved today's Operdle!
+                    You solved today&apos;s Operdle!
                   </p>
                 </>
               ) : (
@@ -296,7 +294,7 @@ export function GameBoard({ gameData, onGameComplete, submittedResult, isReviewM
   );
 }
 
-function SequenceDropArea({ operations, minWidth, isLocked }: { operations: Operation[]; minWidth: number; isLocked?: boolean }) {
+function SequenceDropArea({ operations, minWidth }: { operations: Operation[]; minWidth: number; isLocked?: boolean }) {
   const { setNodeRef, isOver } = useDroppable({
     id: 'sequence-area',
   });
@@ -330,7 +328,7 @@ function SequenceDropArea({ operations, minWidth, isLocked }: { operations: Oper
   );
 }
 
-function AvailableDropArea({ operations, isLocked }: { operations: Operation[]; isLocked?: boolean }) {
+function AvailableDropArea({ operations }: { operations: Operation[]; isLocked?: boolean }) {
   const { setNodeRef, isOver } = useDroppable({
     id: 'available-area',
   });

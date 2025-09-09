@@ -5,7 +5,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isAfter, isBefore, startOfYear } from 'date-fns';
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isAfter, isBefore } from 'date-fns';
 import { CalendarDay } from '@/lib/types';
 import { getUserProgress } from '@/lib/storage';
 import { CheckCircle, Lock, Calendar as CalendarIcon } from 'lucide-react';
@@ -65,33 +65,6 @@ export function GameCalendar({ onDateSelect, selectedDate, minDate, maxDate }: G
     }
   };
 
-  const renderDayContent = (date: Date) => {
-    const dateString = format(date, 'yyyy-MM-dd');
-    const calendarDay = calendarDays.find(day => day.date === dateString);
-    
-    if (!calendarDay) return null;
-    
-    const dayNumber = date.getDate();
-    
-    return (
-      <div className="relative w-full h-full flex items-center justify-center">
-        <span className={`
-          ${calendarDay.isToday ? 'font-bold' : ''}
-          ${calendarDay.isFuture ? 'text-muted-foreground' : ''}
-        `}>
-          {dayNumber}
-        </span>
-        
-        {calendarDay.isCompleted && (
-          <CheckCircle className="absolute top-0 right-0 h-3 w-3 text-green-600" />
-        )}
-        
-        {calendarDay.isFuture && (
-          <Lock className="absolute top-0 right-0 h-3 w-3 text-muted-foreground" />
-        )}
-      </div>
-    );
-  };
 
   const completedCount = progress.completedDates.length;
   const availableDays = calendarDays.filter(day => !day.isFuture).length;
@@ -163,7 +136,7 @@ export function GameCalendar({ onDateSelect, selectedDate, minDate, maxDate }: G
         {/* Progress Summary */}
         <div className="text-center space-y-2">
           <div className="text-sm text-muted-foreground">
-            You've completed {completedCount} out of {availableDays} available puzzles
+            You&apos;ve completed {completedCount} out of {availableDays} available puzzles
           </div>
           
           {completedCount > 0 && (
