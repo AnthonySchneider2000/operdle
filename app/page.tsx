@@ -4,12 +4,10 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import { GameBoard } from '@/components/game/GameBoard';
 import { GameCalendar } from '@/components/game/GameCalendar';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useGameData } from '@/hooks/use-game-data';
 import { useMarkDateCompleted, useDateCompletion, useStorageSync } from '@/hooks/use-user-progress';
-import { Trophy, Target } from 'lucide-react';
+import { Target } from 'lucide-react';
 
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -21,7 +19,7 @@ export default function Home() {
   const markCompleted = useMarkDateCompleted();
   
   const selectedDateString = format(selectedDate, 'yyyy-MM-dd');
-  const { isCompleted, result } = useDateCompletion(selectedDateString);
+  const { result } = useDateCompletion(selectedDateString);
 
   const handleGameComplete = (isCorrect: boolean, submittedSolution: string[]) => {
     markCompleted.mutate({
@@ -54,7 +52,7 @@ export default function Home() {
             <Target className="h-8 w-8 text-primary" />
             <h1 className="text-4xl font-bold">Operdle</h1>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto pb-4">
             Arrange the mathematical operations in the correct order to transform the input number into the target number.
           </p>
         </div>

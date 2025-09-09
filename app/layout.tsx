@@ -55,7 +55,7 @@ function Header() {
     <header className="sticky top-0 z-10 w-full border-b bg-background">
       <div className="flex h-16 items-center w-full px-4">
         <SidebarTrigger />
-        <div className="flex-1 flex justify-center font-medium">{SITE_TITLE}</div>
+        <div className="flex-1 flex justify-center font-medium"></div>
         <div className="flex items-center gap-2">
           <HowToPlayPopover />
           <ThemeToggle />
