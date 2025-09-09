@@ -132,28 +132,6 @@ Operdle is fully responsive and works seamlessly on:
 - Tablets
 - Mobile phones (iOS Safari, Android Chrome)
 
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-The easiest way to deploy Operdle is using the [Vercel Platform](https://vercel.com/new):
-
-1. Push your code to a Git repository
-2. Import the project in Vercel
-3. Deploy with zero configuration
-
-### Other Platforms
-
-Operdle can be deployed on any platform that supports Next.js:
-- Netlify
-- Railway
-- Digital Ocean App Platform
-- AWS Amplify
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
