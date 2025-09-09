@@ -50,94 +50,62 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
-      {/* Header */}
-      <div className="text-center space-y-4">
-        <div className="flex items-center justify-center gap-4">
-          <Target className="h-8 w-8 text-primary" />
-          <h1 className="text-4xl font-bold">Operdle</h1>
-        </div>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Arrange the mathematical operations in the correct order to transform the input number into the target number.
-        </p>
-      </div>
-
-      {/* Date and Stats Bar */}
-      <Card className="p-4">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-2 border rounded-md">
-              <Calendar className="h-4 w-4" />
-              {format(selectedDate, 'MMMM d, yyyy')}
-            </div>
-            
-            {isToday && <Badge variant="default">Today</Badge>}
-            {isCompleted && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                <Trophy className="h-3 w-3" />
-                Completed
-              </Badge>
-            )}
+      <div className="min-h-[calc(100vh-4rem)]">
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center gap-4">
+            <Target className="h-8 w-8 text-primary" />
+            <h1 className="text-4xl font-bold">Operdle</h1>
           </div>
-
-          {userProgress && (
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Trophy className="h-4 w-4" />
-                {userProgress.completedDates.length} solved
-              </div>
-              <div className="flex items-center gap-1">
-                <Clock className="h-4 w-4" />
-                {result ? `${result.attempts} attempts` : 'Not attempted'}
-              </div>
-            </div>
-          )}
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Arrange the mathematical operations in the correct order to transform the input number into the target number.
+          </p>
         </div>
-      </Card>
 
-      <Separator />
+        {/* Game Content */}
+        <GameBoard
+          gameData={gameData}
+          onGameComplete={handleGameComplete}
+          submittedResult={result}
+          isReviewMode={!!result}
+        />
 
-      {/* Game Content */}
-      <GameBoard
-        gameData={gameData}
-        onGameComplete={handleGameComplete}
-        submittedResult={result}
-        isReviewMode={!!result}
-      />
-
-      {/* Show correct solution for completed puzzles */}
-      {isCompleted && (
-        <Card className="p-6 bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800">
-          <div className="text-center space-y-4">
-            <Trophy className="h-8 w-8 text-green-600 mx-auto" />
-            <h3 className="text-lg font-semibold text-green-800 dark:text-green-200">
-              Puzzle Completed Successfully!
-            </h3>
-            <p className="text-green-700 dark:text-green-300">
-              Solved on {result?.solvedAt ? format(new Date(result.solvedAt), 'MMMM d, yyyy') : 'a previous date'}.
-            </p>
-            
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-green-800 dark:text-green-200">
-                Correct Solution:
+        {/* Show correct solution for completed puzzles */}
+        {isCompleted && (
+          <Card className="p-6 bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800">
+            <div className="text-center space-y-4">
+              <Trophy className="h-8 w-8 text-green-600 mx-auto" />
+              <h3 className="text-lg font-semibold text-green-800 dark:text-green-200">
+                Puzzle Completed Successfully!
+              </h3>
+              <p className="text-green-700 dark:text-green-300">
+                Solved on {result?.solvedAt ? format(new Date(result.solvedAt), 'MMMM d, yyyy') : 'a previous date'}.
               </p>
-              <div className="flex items-center justify-center gap-2 flex-wrap">
-                <Badge variant="outline">{gameData.inputNumber}</Badge>
-                {gameData.solution.map((operationId, index) => {
-                  const operation = gameData.operations.find(op => op.id === operationId);
-                  return operation ? (
-                    <div key={operationId} className="flex items-center gap-2">
-                      <span className="text-muted-foreground">→</span>
-                      <Badge variant="secondary">{operation.label}</Badge>
-                    </div>
-                  ) : null;
-                })}
-                <span className="text-muted-foreground">→</span>
-                <Badge variant="outline">{gameData.targetNumber}</Badge>
+              
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-green-800 dark:text-green-200">
+                  Correct Solution:
+                </p>
+                <div className="flex items-center justify-center gap-2 flex-wrap">
+                  <Badge variant="outline">{gameData.inputNumber}</Badge>
+                  {gameData.solution.map((operationId, index) => {
+                    const operation = gameData.operations.find(op => op.id === operationId);
+                    return operation ? (
+                      <div key={operationId} className="flex items-center gap-2">
+                        <span className="text-muted-foreground">→</span>
+                        <Badge variant="secondary">{operation.label}</Badge>
+                      </div>
+                    ) : null;
+                  })}
+                  <span className="text-muted-foreground">→</span>
+                  <Badge variant="outline">{gameData.targetNumber}</Badge>
+                </div>
               </div>
             </div>
-          </div>
-        </Card>
-      )}
+          </Card>
+        )}
+
+      </div>
 
       {/* Previous Days Section */}
       <div className="pt-12 space-y-6">
@@ -152,7 +120,7 @@ export default function Home() {
         <GameCalendar
           onDateSelect={handleDateSelect}
           selectedDate={selectedDate}
-          minDate={new Date('2024-01-01')}
+          minDate={new Date('2025-09-01')}
           maxDate={new Date()}
         />
       </div>
