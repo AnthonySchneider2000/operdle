@@ -5,7 +5,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isAfter, isBefore } from 'date-fns';
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isAfter, isBefore, startOfYear } from 'date-fns';
 import { CalendarDay } from '@/lib/types';
 import { getUserProgress } from '@/lib/storage';
 import { CheckCircle, Lock, Calendar as CalendarIcon } from 'lucide-react';
@@ -25,6 +25,10 @@ export function GameCalendar({ onDateSelect, selectedDate, minDate, maxDate }: G
   const gameStartDate = minDate || new Date('2024-01-01');
   const today = new Date();
   const latestDate = maxDate || today;
+
+  // Calculate month boundaries for navigation
+  const fromMonth = startOfMonth(gameStartDate); // September 2025
+  const toMonth = startOfMonth(today); // Current month
 
   const generateCalendarDays = (): CalendarDay[] => {
     const start = startOfMonth(currentMonth);
@@ -114,6 +118,8 @@ export function GameCalendar({ onDateSelect, selectedDate, minDate, maxDate }: G
             onSelect={(date) => date && handleDateClick(date)}
             month={currentMonth}
             onMonthChange={setCurrentMonth}
+            fromMonth={fromMonth}
+            toMonth={toMonth}
             disabled={(date) => {
               const dateString = format(date, 'yyyy-MM-dd');
               const calendarDay = calendarDays.find(day => day.date === dateString);
