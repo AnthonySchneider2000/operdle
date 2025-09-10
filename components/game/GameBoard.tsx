@@ -183,23 +183,6 @@ export function GameBoard({ gameData, onGameComplete, submittedResult, isReviewM
       <div className="w-full max-w-4xl mx-auto space-y-6">
         {/* Game Header with Kanban-style Operation Flow */}
         <div className="text-center space-y-6">
-          {/* Current Result Display - Only show after submission */}
-          {isSubmitted && finalResult !== null && (
-            <div className="flex items-center justify-center gap-2">
-              <Badge 
-                variant={isCorrect ? "default" : "secondary"}
-                className="text-lg px-3 py-1"
-              >
-                {formatNumber(finalResult)}
-              </Badge>
-              {isCorrect ? (
-                <CheckCircle className="h-5 w-5 text-green-600" />
-              ) : (
-                <XCircle className="h-5 w-5 text-red-600" />
-              )}
-            </div>
-          )}
-
           {/* Kanban-style Operation Flow */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
             {/* Input Number */}
