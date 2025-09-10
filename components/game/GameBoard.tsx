@@ -201,9 +201,9 @@ export function GameBoard({ gameData, onGameComplete, submittedResult, isReviewM
           )}
 
           {/* Kanban-style Operation Flow */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
             {/* Input Number */}
-            <Badge variant="outline" className="text-2xl px-6 py-3 font-bold">
+            <Badge variant="outline" className="text-lg sm:text-2xl px-4 py-2 sm:px-6 sm:py-3 font-bold">
               {formatNumber(gameData.inputNumber)}
             </Badge>
 
@@ -211,13 +211,13 @@ export function GameBoard({ gameData, onGameComplete, submittedResult, isReviewM
             <SortableContext items={userOperations.map(op => op.id)} strategy={verticalListSortingStrategy}>
               <SequenceDropArea
                 operations={userOperations}
-                minWidth={Math.max(200, gameData.operations.length * 100)}
+                minWidth={Math.max(200, gameData.operations.length * 80)}
                 isLocked={isSubmitted}
               />
             </SortableContext>
 
             {/* Output Number */}
-            <Badge variant="outline" className="text-2xl px-6 py-3 font-bold">
+            <Badge variant="outline" className="text-lg sm:text-2xl px-4 py-2 sm:px-6 sm:py-3 font-bold">
               {formatNumber(gameData.targetNumber)}
             </Badge>
           </div>
@@ -299,23 +299,26 @@ function SequenceDropArea({ operations, minWidth }: { operations: Operation[]; m
     id: 'sequence-area',
   });
 
+  // Calculate responsive min width - smaller on mobile
+  const mobileMinWidth = Math.max(minWidth * 0.8, 200);
+
   return (
     <div
       ref={setNodeRef}
-      className={`relative flex items-center justify-center gap-2 px-6 py-4 border-2 border-dashed rounded-lg transition-colors min-h-[60px] ${
+      className={`relative flex items-center justify-center gap-2 px-3 py-4 sm:px-6 border-2 border-dashed rounded-lg transition-colors min-h-[60px] w-full sm:w-auto max-w-[90vw] sm:max-w-none ${
         isOver ? 'border-blue-500 bg-blue-50 dark:bg-blue-950' : 'border-muted-foreground/30'
       }`}
       style={{ 
-        minWidth: `${Math.max(minWidth, 300)}px`
+        minWidth: `${mobileMinWidth}px`,
       }}
     >
       {operations.length === 0 ? (
-        <div className="text-muted-foreground text-sm py-4">Drag operations here</div>
+        <div className="text-muted-foreground text-sm py-4 text-center">Drag operations here</div>
       ) : (
-        <div className="flex items-center gap-2 flex-wrap justify-center">
+        <div className="flex items-center gap-1 sm:gap-2 flex-wrap justify-center">
           {operations.map((operation, index) => (
-            <div key={operation.id} className="flex items-center gap-2">
-              {index > 0 && <ArrowRight className="h-4 w-4 text-muted-foreground" />}
+            <div key={operation.id} className="flex items-center gap-1 sm:gap-2">
+              {index > 0 && <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />}
               <OperationCard operation={operation} />
             </div>
           ))}

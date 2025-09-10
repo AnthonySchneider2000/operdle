@@ -35,8 +35,8 @@ export function OperationCard({ operation, isInSequence = false, isDragOverlay =
       ref={setNodeRef}
       style={style}
       className={`
-        relative p-4 flex items-center justify-center min-h-[60px] min-w-[80px] 
-        cursor-grab active:cursor-grabbing select-none
+        relative p-3 sm:p-4 flex items-center justify-center min-h-[50px] sm:min-h-[60px] min-w-[70px] sm:min-w-[80px] 
+        cursor-grab active:cursor-grabbing select-none touch-manipulation
         ${isDragging ? 'opacity-50' : ''}
         ${isDragOverlay ? 'shadow-lg rotate-3' : ''}
         ${isInSequence 
@@ -48,9 +48,9 @@ export function OperationCard({ operation, isInSequence = false, isDragOverlay =
       {...attributes}
       {...listeners}
     >
-      <div className="flex items-center gap-2">
-        <GripVertical className="h-4 w-4 opacity-50" />
-        <span className="font-mono text-lg font-semibold">
+      <div className="flex items-center gap-1 sm:gap-2">
+        <GripVertical className="h-3 w-3 sm:h-4 sm:w-4 opacity-50" />
+        <span className="font-mono text-base sm:text-lg font-semibold">
           {operation.label}
         </span>
       </div>
